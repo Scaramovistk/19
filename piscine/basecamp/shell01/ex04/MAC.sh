@@ -1,1 +1,0 @@
-ifconfig | grep -i "ether" | cut -c15-
