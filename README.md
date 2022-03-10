@@ -3,195 +3,193 @@
 </br>
 
 
-**Ce tuto vous expliquera dans les grande lignes le projet, il n'a pas pour but d'être exhaustif : faites vos recherches et comprenez toujours ce que vous faites. Bon courage !**
+**This tutorial will explain the project in broad outline, it is not intended to be exhaustive: do your research and always understand what you are doing. Good luck !**
 
 
-Ce projet a pour but de vous faire découvrir le merveilleux monde de la virtualisation.
+This project aims to introduce you to the wonderful world of virtualization.
 
-Vous allez créer votre première machine en respectant des consignes précises et en
-utilisant VirtualBox (ou UTM si VirtualBox ne fonctionne pas sur votre machine). 
+You are going to create your first machine by respecting precise instructions and by
+using VirtualBox (or UTM if VirtualBox is not running on your machine).
 
-Ainsi, à la suite de ce projet, vous serez capable d’installer votre propre système d’exploitation
-implémentant des règles strictes.
+Thus, following this project, you will be able to install your own operating system
+implementing strict rules.
 
-Lien pour [le pdf de correction](https://github.com/secondfry/school21-checklists/blob/8ccdcbee157c228a87057833cd9d63390fd36c3d/ng_1_born2beroot.pdf).
-
-Pour les manipulations demandées durant la correction, voir la fin du tuto.
+For the manipulations requested during the correction, see the end of the tutorial.
 </br>
 
-___Mise en place de votre VM___
+___Settin up your VM___
 --------------------------------
 
-*Plus d'infos sur les fichiers systemes sous Linux sur [How To Geek](https://www.howtogeek.com/howto/33552/htg-explains-which-linux-file-system-should-you-choose/) et la mise en place des partitions (page un peu vieille) sur [Developpez.com](https://linux.developpez.com/formation_debian/partitionner.html)*
+*More information on system files under Linux on[How To Geek](https://www.howtogeek.com/howto/33552/htg-explains-which-linux-file-system-should-you-choose/) and setting up partitions (little bit old) in [Developpez.com](https://linux.developpez.com/formation_debian/partitionner.html)*
 </br>
 
-* Téléchargez la version stable de [Debian](https://www.debian.org/)
+* Dowload the stable version [Debian](https://www.debian.org/)
 
-Elle se présente sous la forme d'une image CD : un .iso que l'on va monter par la suite dans notre machine virtuelle.
+It comes in the form of a CD image: an .iso that we will later mount in our virtual machine.
 
-**Si vous souhaitez faire les bonus** vous pouvez suivre cette installation ci, faites par [hanshazairi](https://github.sre.pub/hanshazairi/42-born2beroot/blob/main/README.md) : [ici](https://www.youtube.com/watch?v=2w-2MX5QrQw)
+**If you want to do the bonus** you can follow this installation here, made by [hanshazairi](https://github.sre.pub/hanshazairi/42-born2beroot/blob/main/README.md) : [here](https://www.youtube.com/watch?v=2w-2MX5QrQw)
 
 </br>
   
-* Lancez la machine virtuelle (VM) VirtualBox, déjà installée sur les ordinateurs de 42 normalement:
+* Launch the VirtualBox virtual machine (VM), already installed on 42 computers normally:
 
-Bouton New/Nouvelle (Ctrl + N) :
+Button New (Ctrl + N) :
 
-Nom de votre VM - 
-Folder : dans un endroit où vous pouvez utiliser 8Go.
+Name of your VM - 
+Folder : in a place where you can use 8GB.
 
-<blockquote>Si vous êtes à 19 vous allez saturer votre session : vous pouvez travailler de maniere temporaire dans le goinfre mais sachez que celui-ci est souvent vidé, pensez donc à exporter votre VM pour ne pas avoir de mauvaise surprise</blockquote>
+<blockquote>If you are at 19 you will saturate your session: you can work temporarily in the goinfree be aware that it is often emptied, so remember to export your VM so as not to have any unpleasant surprises</blockquote>
 
 Type : Linux - 
 Version : Debian 64bits 	
 
-Quantitée de RAM allouée à la machine virtuelle : 1 ou 2Go sont suffisants
+Amount of RAM allocated to the virtual machine: 1 or 2 GB are sufficient
 
-Créez un disque dur virtuel maintenant (taille recommandée : 8Go) - VDI (VirtualBox Disk Image) - Dynamically allocated - Vérifiez sa localisation et la taille : 8Go - Creat
+Create a virtual hard disk now (recommended size: 8GB) - VDI (VirtualBox Disk Image) - Dynamically allocated - Check its location and size: 8GB - Creat
 
-Allez dans les settings de votre machine virtuelle
+Go to the settings of your virtual machine
 
-_Onglet STORAGE_ - Controller: IDE : Click sur le petit cd bleu en dessous, dans Attributes cliquer sur le disque bleu a coté d'Optical Drive et monter le .iso de la version de Debian 
+_Onglet STORAGE_ - Controller: IDE: Click on the small blue cd below, in Attributes click on the blue disk next to Optical Drive and mount the .iso of the Debian version
 
-_Onglet NETWORK_ -Enable Network Adapter : Bridged Adapter/Acces par pont (chez vous) __OU__ NAT (à 42)
+_Onglet NETWORK_ -Enable Network Adapter : Bridged Adapter/Access by bridge __OU__ NAT (in 42)
 
 _OK_
 
 </br>
 
-* Lancez votre VM 
+* Lounch your VM 
 
 </br>
 
-__Installation de Debian__
+__Installing the Debian__
 ------------------------------------
 
-*Plus d'infos sur [Debian-handbook](https://debian-handbook.info/browse/fr-FR/stable/sect.installation-steps.html) et 
-[Doc.Ubuntu](https://doc.ubuntu-fr.org/lvm) et sur la connection via SSH sur [OpenClassRoom](https://openclassrooms.com/fr/courses/43538-reprenez-le-controle-a-laide-de-linux/41773-la-connexion-securisee-a-distance-avec-ssh)*
+*More info in [Debian-handbook](https://debian-handbook.info/browse/fr-FR/stable/sect.installation-steps.html) et 
+[Doc.Ubuntu](https://doc.ubuntu-fr.org/lvm) and about the ssh connection in[OpenClassRoom](https://openclassrooms.com/fr/courses/43538-reprenez-le-controle-a-laide-de-linux/41773-la-connexion-securisee-a-distance-avec-ssh)*
 
 </br>
 
-Verifiez que le bon iso est utilisé 
+Check that the correct iso is used
 
-<blockquote>Agrandir la fenetre avec l'onglet Video Memory - Virtual Screen : 300%
+<blockquote>Enlarge the window with the Video Memory tab - Virtual Screen: 300%
 
-Pour vous déplacer dans la VM utilisez TAB ou les flèches, pour afficher le mdp : espace, confirmer : enter </blockquote>
+To move in the VM use TAB or the arrows, to display the password: space, confirm: enter</blockquote>
 
-Installation - Langue : comme vous voulez - Pays : Belgique (ou votre localisation) - Clavier : selon le votre (Etats-Unis à 42)
+Installation - Language: as you wish - Country: Belgium (or your location) - Keyboard: according to yours (United States at 42)
 
-Configurer le réseau - Hostname/Nom de la machine : votrelogin suivi de 42, ex : wil42
+Configure the network - Hostname/Machine name: yourlogin followed by 42, ex: wil42
 
-Domaine : _rien_
+Domain: _nothing_
 
-Choisissez le mdp pour la partition root & le confirmer
+Choose the password for the root partition & confirm it
 
-Nom complet nouvel utilisateur : login - Identifiant pour le compteur utilisateur : login - Mdp du nouvel utilisateur : ce que vous voulez
+New user full name: login - Identifier for the user counter: login - Password of the new user: whatever you want
 
-Partitionner les disques : Assisté - utiliser tout un disque avec LVM chiffré
+Partition Disks: Assisted - use entire disk with encrypted LVM
 
-Selectionnez le disque dur à partitionner (termine par VBOX HARDDISK)
+Select the hard drive to partition (ends with VBOX HARDDISK)
 
-Partitionner /home séparée - OUI
+Partition /home separately - YES
 
-Choisissez une chouette phrase secrète avec des chiffres, des lettres et des signes de ponctuation
+Choose a cool passphrase with numbers, letters and punctuation marks
 
-Partitionner les disques : 7.5 GB
+Partition disks: 7.5 GB
 
-<blockquote>Vérifier que vous avez bien : Groupe de volumes LVM : un volume logique home, un autre root, un autre swap
+<blockquote>Check that you have: LVM volume group: one logical volume home, another root, another swap
 
-Sur votre disque dur : une partition primaire pour le boot et une autre partition logique, chiffrée</blockquote>
+On your hard disk: a primary partition for booting and another logical partition, encrypted</blockquote>
 
-Terminez le partitionnement et appliquer les changements - OUI
+Finish partitioning and apply changes - YES
 
-Le système de base s'installe
+The base system installs
 
-Faut-il analyser un autre CD ou DVD ? - NON
+Should another CD or DVD be scanned? - NO
 
-Config. l'outil de gestion des paquets : Belgique
+config. the package management tool: Belgium
 
-Miroir de l'archive Debian : deb.debian.org
+Debian Archive Mirror: deb.debian.org
 
-Mandataire HTTP/Proxy : *vide*
+HTTP Proxy/Proxy: *empty*
 
-Etude statistique : NON
+Statistical study: NO
 
-Séléction des logiciels : Cocher (touche espace) serveur SSH et utilitaires usuel du système, rien d'autre
+Software selection: Check (space key) SSH server and usual system utilities, nothing else
 
-Installer le GRUB - Sur le /dev/sda ...
+Install GRUB - On the /dev/sda ...
 
-Continuer - La VM se relance
+Continue - VM is restarting
 
-Entrez votre phrase secrete
+Enter your passphrase
 
-Login : root - entrer le bon mdp
+Login: root - enter the correct password
 </br></br>
 
 __SUDO__
 -----------------------------------------------
 
-*Plus d'infos sur Sudo sur [Wiki.Debian](https://wiki.debian.org/fr/sudo)*
+*More info [Wiki.Debian](https://wiki.debian.org/sudo)*
 
 </br>
 
 **Installation**
 
-Installez Sudo : `apt install sudo`
+Install sudo: `apt install sudo`
 
-Vérifiez que Sudo est bien installé : `dpkg -l | grep sudo`
+Verify that sudo is installed: `dpkg -l | grep sudo
 
-**Ajout d'un utilisateur**
+**Adding a user**
 
-Ajoutez un utilisateur au groupe sudo (cet utilisateur pourra donc utiliser la commande sudo) : `adduser <username> sudo`
+Add a user to the sudo group (this user will therefore be able to use the sudo command): `adduser <username> sudo`
 
-Verifiez les utilisateurs du groupe sudo : `getent group sudo`
+Check users in sudo group: `getent group sudo`
 
-Relancez la VM avec `reboot` pour que les changements prenent effet
+Reboot the VM with `reboot` for the changes to take effect
 
-Vérifiez qui bénéficie des droits sudo avec la commande `sudo -v`
+Check who has sudo rights with `sudo -v` command
 
-**Configuration de Sudo**
+**Sudo Setup**
 
 
-<blockquote>Tous les fichiers du répertoire /etc/sudoers.d/ ne finissant pas par ~ ou ne contenant pas un . sont lus et analysés lorsque l'on utilise la commande sudo.
+<blockquote>All files in the /etc/sudoers.d/ directory that do not end with ~ or contain a . are read and parsed when using the sudo command.
 
-Pour modifier le fonctionnement de la commande sudo, l'administrateur du système ne modifie plus le fichier /etc/sudoers mais positionne des fichiers de personnalisation dans le répertoire /etc/sudoers.d.
+To modify the operation of the sudo command, the system administrator no longer modifies the /etc/sudoers file but places customization files in the /etc/sudoers.d directory.
 
-Source : [Wiki Ubuntu-fr](https://doc.ubuntu-fr.org/sudoers)</blockquote>
+Source: [Ubuntu-fr Wiki](https://doc.ubuntu-fr.org/sudoers)</blockquote>
 
-Créez un nouveau fichier pour configurer sudo avec `nano /etc/sudoers.d/<filename>`
+Create a new file to configure sudo with `nano /etc/sudoers.d/<filename>`
 
-Ajoutez les commandes suivantes :
+Add the following commands:
 
-Pour limiter les tentatives d'authentification à 3 dans le cas d'un mdp incorrecte :
-
-```
-Defaults        passwd_tries=3
-```
-
-Pour ajouter un message d'erreur personnalisé :
+To limit authentication attempts to 3 in the event of an incorrect password:
 
 ```
-Defaults        badpass_message="<custom-error-message>"
+Defaults passwd_tries=3
 ```
 
-Enregistrer l'activité des sudoers dans un fichier de log spécifique (pensez à bien créer ce fichier par la suite):
+To add a custom error message:
 
 ```
-Defaults        log_host, log_year, logfile="/var/log/sudo/<filename>"
+Defaults badpass_message="<custom-error-message>"
 ```
 
-Pour archiver toutes les input/output de sudo dans /var/log/sudo/ :
+Save sudoer activity in a specific log file (remember to create this file afterwards):
 
 ```
-Defaults        log_input,log_output
-Defaults        iolog_dir="/var/log/sudo"
+Defaults log_host, log_year, logfile="/var/log/sudo/<filename>"
 ```
-Pour forcer à ce que le sudoers ne puisse pas agir ailleurs qu'en mode console :
+
+To log all sudo input/output to /var/log/sudo/:
 
 ```
-Defaults        requiretty
+Defaults log_input,log_output
+Defaults iolog_dir="/var/log/sudo"
 ```
-Pour restreindre les path utilisés par sudo :
+To force sudoers to not be able to act anywhere other than in console mode:
+
+```
+Defaults required
+```
+To restrict the paths used by sudo:
 
 ```
 Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
@@ -201,172 +199,169 @@ Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/
 __Configuration SSH & UFW__
 ------------------------------------
 
-*Plus d'infos sur l'installation du serveur SSH sur Debian sur [Devconnected](https://devconnected.com/how-to-install-and-enable-ssh-server-on-debian-10/) et
-l'installation d'UFW et mise en place du pare-feu sur [Digitalocean](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-20-04-fr#:~:text=Vous%20pouvez%20sp%C3%A9cifier%20des%20plages,ufw%20allow%206000%3A6007%2Ftcp)*
+*More info on installing SSH server on Debian at [Devconnected](https://devconnected.com/how-to-install-and-enable-ssh-server-on-debian-10/) and
+installing UFW and setting up the firewall on [Digitalocean](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on -ubuntu-20-04-en#:~:text=You%20can%20sp%C3%A9cify%20of%20beaches,ufw%20allow%206000%3A6007%2Ftcp)*
 
 </br>
 
-**Installation et parametrage SSH**
+**Installation and SSH configuration**
 
-* Lancez une maj des paquets : `apt-get update`
+* Launch a package update: `apt-get update`
 
-* Vérifiez que le serveur ssh est bien installé : `apt-get install openssh-server`
+* Check that the ssh server is installed: `apt-get install openssh-server`
 
-Configurez dans nano afin que le serveur ssh soit actif uniquement sur le port 4242 : `nano /etc/ssh/sshd_config`
+Configure in nano so that the ssh server is only active on port 4242: `nano /etc/ssh/sshd_config`
 
-Décommentez (-#) la ligne `#Port 22` et mettre : `Port 4242`
+Uncomment (-#) the line `#Port 22` and put: `Port 4242`
 
-Décommentez (-#) la ligne `#PermitRootLogin prohibit-password` et mettre : `PermitRootLogin no`
+Uncomment (-#) the line `#PermitRootLogin prohibit-password` and put: `PermitRootLogin no`
 
-Sortez du fichier avec Ctrl + X
+Exit the file with Ctrl + X
 
-<blockquote>Sauvegardez (Ecrire) bien votre fichier nano sinon vos modifications seront perdues</blockquote>
+<blockquote>Save (Write) your nano file otherwise your changes will be lost</blockquote>
 
-Verifiez le status SSH avec `service ssh status`
+Check SSH status with `service ssh status`
 
-Connaitre son IP dans la VM : `ip a` 
+Know your IP in the VM: `ip a`
 
-Notez dans un coin ce qui se trouve après le premier inet, ainsi que la seconde adresse ip un peu plus loin
-
-
-Allez dans les settings de votre VM (sur virtualBox) - Advanced - Port Forwarding
-
-Dans le Host IP, mettez la premiere adresse ip, Host Port : 4242
-
-Dans le Guest IP : la seconde adresse ip, Host port : 4242
-
-Ok, Ok
-
-Relancez la VM 
-
-</br>
-
-##**Se connecter du terminal de votre ordi sur votre VM via SSH**
+Note in a corner what is after the first inet, as well as the second ip address a little further
 
 
-Connectez vous à votre VM via le port 4242 avec `ssh <username>@<ip-adress> -p 4242`
+Go to your VM settings (on virtualBox) - Advanced - Port Forwarding
 
-Pour sortir de la session : `logout`
+In the Host IP, put the first ip address, Host Port: 4242
+
+In the Guest IP: the second ip address, Host port: 4242
+
+Okay, okay
+
+Restart the VM
 
 </br>
 
-**Installation du parefeu avec UFW**
+##**Connect from your computer terminal to your VM via SSH**
 
-Installez ufw : `apt-get install ufw`
 
-Activez le pare-feu : `ufw enable`
+Connect to your VM via port 4242 with `ssh <username>@<ip-address> -p 4242`
 
-Bloquez toutes les connections venant de l'exterieur : `ufw default deny incoming`
+To exit the session: `logout`
 
-Permettez aux applications du serveurs d'avoir accès à l'extérieur :`ufw default allow outgoing`
+</br>
 
-Configurez le pare-feu pour les connexions entrantes sur le port 4242 : `ufw allow 4242`
+**Firewall installation with UFW**
 
-Vérifiez que tout est en ordre : `ufw status numbered`
+Install ufw: `apt-get install ufw`
 
-<blockquote>Si une des règles ne vous convient pas : `ufw delete [rule_nbr]`</blockquote>
+Enable the firewall: `ufw enable`
+
+Block all connections from outside: `ufw default deny incoming`
+
+Allow server applications to have outgoing access: `ufw default allow outgoing`
+
+Configure the firewall for incoming connections on port 4242: `ufw allow 4242`
+
+Check that everything is in order: `ufw status numbered`
+
+<blockquote>If one of the rules does not suit you: `ufw delete [rule_nbr]`</blockquote>
 
 </br></br>
 
-__Mise en place de la politique de mot de passe forte__
+__Implementation of strong password policy__
 -----------------------------------------------
 
-*Plus d'info sur l'autentification d'utilisateur avec PAM sur [Debian.org](https://www.debian.org/doc/manuals/securing-debian-manual/ch04s11.fr.html) et [Systutorials.com](https://www.systutorials.com/docs/linux/man/5-pwquality.conf/)*
+*More info on user authentication with PAM at [Debian.org](https://www.debian.org/doc/manuals/securing-debian-manual/ch04s11.en.html) and [Systutorials. com](https://www.systutorials.com/docs/linux/man/5-pwquality.conf/)*
 
 </br>
 
-Installez libpam-pwquality et cracklib-runtime (permet de gerer la complexité des mdp) :
+Install libpam-pwquality and cracklib-runtime (allows to manage the complexity of mdp):
 
 ```
 apt-get -y install libpam-pwquality cracklib-runtime
 ```
 
-Modifiez la durée à laquelle les mdp peuvent être changés dans le fichier /etc/login.defs (définit la configuration de la suite shadow password (mots de passe cachés) pour le système.) :
+Change the duration at which passwords can be changed in the /etc/login.defs file (sets the shadow password suite configuration for the system.):
 
 ```
 nano /etc/login.defs
 ```
 
-Dans la section Password aging controls indiquer le nombre de jour max au bout duquel le mdp expirera :
+In the Password aging controls section, indicate the maximum number of days after which the password will expire:
 
 `PASS_MAX_DAYS 30`
 
-Et le nombre de jour min entre deux modifications du mdp :
+And the minimum number of days between two changes to the password:
 
 `PASS_MIN_DAYS 2`
 
-Dans le fichier de configuration :
+In the config file:
 
 ```
 nano /etc/pam.d/common-password
 ```
 
-Sur la ligne `password requisite pam_pwquality.so retry=3` ajouter les instructions suivantes :
+On the line `password requisite pam_pwquality.so retry=3` add the following instructions:
 
-`difok=7`    Nombre de caractères du nouveau mot de passe qui ne sont pas présents dans l'ancien, par défaut difok=1
+`difok=7` Number of characters in the new password that are not present in the old one, by default difok=1
 
-`minlen=10`    Taille minimum du nouveau mot de passe. Cependant un bonus d'un caractère en plus est rajouté si un type de caractères différent de plus est présent dans le mot de passe.
+`minlen=10` Minimum size of new password. However, a bonus of one more character is added if one more different type of character is present in the password.
 
-`dcredit=-1`    Si dcredit < 0, dcredit est l'opposé du nombre minimum de chiffres dans le nouveau mot de passe, exemple si dcredit = -5, il faut au moins 5 chiffres dans le mot de passe.
+`dcredit=-1` If dcredit < 0, dcredit is the opposite of the minimum number of digits in the new password, example if dcredit = -5, it requires at least 5 digits in the password.
 
-`ucredit=-1`    Si ucredit < 0, ucredit est l'opposé du nombre minimum de lettres majuscules dans le nouveau mot de passe, exemple si ucredit = -4, il faut au moins 4 lettres majuscules dans le mot de passe
+`ucredit=-1` If ucredit < 0, ucredit is the opposite of the minimum number of uppercase letters in the new password, example if ucredit = -4, at least 4 uppercase letters are required in the password
 
-`maxrepeat=3`    Si maxrepeat=N, alors un caractère ne pourra pas être présent plus de N fois
+`maxrepeat=3` If maxrepeat=N, then a character cannot be present more than N times
 
-`reject_username` Verifie que le nom de l'utilisateur n'est pas contenu dans le mot de passe, si oui le mdp est refusé
+`reject_username` Verifies that the username is not contained in the password, if so the password is refused
 
-`enforce_for_root` Pour que ces restrictions prenent effet aussi sur root
+`enforce_for_root` To enforce these restrictions on root as well
 
-Au final votre ligne ressemblera à :
-
+In the end your line will look like:
 ```password        requisite                       pam_pwquality.so retry=3 minlen=10 ucredit=-1 dcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root```
 
-Sur la ligne du dessous, apres pam_unix.so rajouter `remember=1` pour garder en mémoire le dernier mot de passe utilisé et pouvoir le comparer lors de la creation d'un nouveau mdp.
+On the line below, after pam_unix.so add `remember=1` to keep in memory the last password used and to be able to compare it when creating a new password.
 
 
-Créer un nouvel utilisateur :
+Create a new user:
 --
 
-Créez un nouvel utilisateur : `adduser <username>`
+Create a new user: `adduser <username>`
 
-Vérifiez qu'il a bien été créé avec `getent passwd <username>`
+Check that it was created with `getent passwd <username>`
 
-Vérifiez le temps de validité des mots de passe grace à `sudo chage -l <username>`
+Check the validity time of passwords with `sudo chage -l <username>`
 
-Créer un nouveau groupe :
+Create a new group:
 --
 
-Créez un nouveau groupe nommé `user42`
+Create a new group named `user42`
 
-Ajoutez votre nouveau membre à ce groupe avec `adduser <username> user42`
+Add your new member to this group with `adduser <username> user42`
 
-Verifiez que l'user a bien été ajouté au groupe user 42 avec `getent group user42`
-
+Check that the user has been added to the group user 42 with `getent group user42`
 </br></br>
 
 __AppArmor__
 --
 
-*Plus d'infos sur AppArmor : [Debian-Handbook](https://debian-handbook.info/browse/fr-FR/stable/sect.apparmor.html) et SELinux : [Debian-Handbook](https://debian-handbook.info/browse/fr-FR/stable/sect.selinux.html)*
+*More info on AppArmor: [Debian-Handbook](https://debian-handbook.info/browse/fr-FR/stable/sect.apparmor.html) and SELinux: [Debian-Handbook](https:/ /debian-handbook.info/browse/fr-FR/stable/sect.selinux.html)*
 
-Normalement installé par défaut, vous pouvez le télécharger avec `apt install apparmor`
+Normally installed by default, you can download it with `apt install apparmor`
 
-Complètez l'installation avec `apt install apparmor-utils`
+Complete the installation with `apt install apparmor-utils`
 
-Vérifiez que le module apparmor fonctionne avec `/usr/sbin/aa-status` ou `apparmor_status`
+Check that the apparmor module is working with `/usr/sbin/aa-status` or `apparmor_status`
 </br>
 
 __SCRIPT__
 --
 
-*Plus d'infos sur le shell sur [Doc-Ubuntu](https://doc.ubuntu-fr.org/projets/ecole/scripting/initiation_au_shell) et le regex sur [Regexr](https://regexr.com/), allez checker le man pour uname, lscpu, awk ... vous pouvez aussi cat les différents fichiers /proc pour voir ce qui vous interesse dans leur contenu*
+*More info on the shell on [Doc-Ubuntu](https://doc.ubuntu-fr.org/projets/ecole/scripting/initiation_au_shell) and the regex on [Regexr](https://regexr.com /), go check the man for uname, lscpu, awk ... you can also cat the different /proc files to see what interests you in their content*
 
-Créez un fichier monitoring.sh
+Create a monitoring.sh file
 ```
-nano monitoring.sh
+nanomonitoring.sh
 ```
-Exemple de script pour **un terminal en anglais**, si vous êtes en français ou une autre langue certaines termes changeront.
-
+Example script for **a terminal in English**, if you are in French or another language some terms will change.
 ```
 #!/bin/bash
 
@@ -415,47 +410,47 @@ End_Of_Message
 ```
 </br></br>
 
-Qui va fonctionner ainsi :
+Which will work like this:
 
-MEMTOTAL : recup la memoire totale
+MEMTOTAL: recover the total memory
 
-MEMAVAIL : recup la memoire non utilisée
+MEMAVAIL: recover unused memory
 
-MEMUSED : Calcul la memoire utilisée
+MEMUSED: Calculate the memory used
 
-LVM : Recupere le type de partition de /root/, qui devrait etre lvm
+LVM: Get partition type from /root/, which should be lvm
 
 
-wall << End_Of_Message : envoie le message (tout ce qui suit jusqu'à End_Of_Message) dans la commande wall qui le fera s'afficher sur tous les terminaux actifs 
+wall << End_Of_Message: sends the message (all that follows up to End_Of_Message) in the wall command which will display it on all active terminals
 
-#Architecture: `uname -a` : recup l'ensemble des infos de votre OS
+#Architecture: `uname -a`: retrieve all your OS information
 
-#CPU physical: `lscpu | awk '/^CPU\(s\)/ {print $2}'` : recup dans lscpu la 2eme colone de la ligne qui commence par CPU(s)
+#CPU physical: `lscpu | awk '/^CPU\(s\)/ {print $2}'`: retrieve in lscpu the 2nd column of the line that begins with CPU(s)
 
-#vCPU : `grep -c 'processor' /proc/cpuinfo` : recup dans cpuinfo l'identifiant du CPU 
+#vCPU: `grep -c 'processor' /proc/cpuinfo`: retrieve in cpuinfo the identifier of the CPU
 
-`echo $MEMUSED $MEMTOTAL | awk '{printf "#Memory Usage: %d/%dMB (%.2f%%)\n", ($1/1024), ($2/1024), ($1/$2)*100}'` : recup les valeurs de MEMUSED et MEMTOTAL, les convertit en MB ( /1024), en fait un % qui est exprimé en float a 2 decimal pret grace à (%.2f%%)
+echo $MEMUSED $MEMTOTAL | awk '{printf "#Memory Usage: %d/%dMB (%.2f%%)\n", ($1/1024), ($2/1024), ($1/$2)*100}'`: get the values of MEMUSED and MEMTOTAL, converts them into MB ( /1024), makes it a % which is expressed in float at 2 decimal places ready thanks to (%.2f%%)
 
-`df --total | tail -n 1 | awk '{printf "#Disk Usage: %d/%dGb (%d%%)\n", ($3/1024), ($2/1048576), $5}'` : recup dans df --total | la derniere ligne | afficher la memoire utilisee dans la 3eme colonne (/en MB) sur la memoire totale dans la 2eme colonne (/en GB) et le pourcentage total de mem utilisé, dans la 5eme colonne
+`df --total | tail -n 1 | awk '{printf "#Disk Usage: %d/%dGb (%d%%)\n", ($3/1024), ($2/1048576), $5}'`: recup in df --total | the last line | display the memory used in the 3rd column (/in MB) on the total memory in the 2nd column (/in GB) and the total percentage of mem used, in the 5th column
 
-`awk '{print "#CPU load: "$1"%\n"}' /proc/loadavg` : recup dans /proc/loadavg l'utilisation actuelle du CPU + %
+`awk '{print "#CPU load: "$1"%\n"}' /proc/loadavg`: get current CPU usage from /proc/loadavg + %
 
-#Last boot: `who -b | awk '{print $3" "$4}'` recup dans who les col. 3 et 4 : la date et l'heure
+#Last boot: `who -b | awk '{print $3" "$4}'` recup in who cols. 3 and 4: date and time
 
-#LVM use: `if [ "$LVM" = "lvm" ]; 	: Compare votre type de partition(LVM) avec lvm et renvoie oui ou non 
+#LVM use: `if [ "$LVM" = "lvm" ]; : Compare your partition type (LVM) with lvm and return yes or no
 then
 echo "yes"
 else
 echo "no"
 fi`
 
-`awk '$4=="01" {count++} END{printf "#Connexions TCP : %d ESTABLISHED\n", count}' /proc/net/tcp`  : recup le nombre de connection TCP en comptant dans la col. 4 du /proc/net/tcp le nb de 01
+`awk '$4=="01" {count++} END{printf "#TCP connections: %d ESTABLISHED\n", count}' /proc/net/tcp`: retrieve the number of TCP connections by counting in the col. 4 of /proc/net/tcp the nb of 01
 
-#User log: `who | awk '{print $1}' | uniq | wc -l` : recup dans who la premiere colonne, une seule fois par utilisateur
+#Userlog: `who | awk '{print $1}' | only | wc -l`: retrieve in who the first column, only once per user
 
-`ip -br a show $(ip route show default | awk '{print $5}') | sed 's/\/[[:digit:]]\{1,3\}//g' | awk '{printf "#Network: IP %s (%s)\n", $3, $4}'` : recup l'adresse ipV4 et l'adresse MAC avec ip a | grep link/ether | awk 'print $2'
+`ip -br a show $(ip route show default | awk '{print $5}') | sed 's/\/[[:digit:]]\{1,3\}//g' | awk '{printf "#Network: IP %s (%s)\n", $3, $4}'`: retrieve ipV4 address and MAC address with ip a | grep link/ether | awk 'print $2'
 
-`grep -c 'COMMAND' /var/log/sudo/<name of the file where you put the activity of sudo> | awk '{printf "#Sudo : %d cmd\n", $1}'` 
+`grep -c 'COMMAND' /var/log/sudo/<name of the file where you put the activity of sudo> | awk '{printf "#Sudo: %d cmd\n", $1}'`
 
 End_Of_Message
 
@@ -463,70 +458,70 @@ End_Of_Message
 __CRON__
 -----------------------------------------------
 
-*Plus d'info sur la configuration de Cron sur [Fedora-fr.org](https://doc.fedora-fr.org/wiki/CRON_:_Configuration_de_t%C3%A2ches_automatis%C3%A9es#:~:text=La%20configuration%20de%20cron%20se,via%20la%20commande%20crontab%20%2De.)*
+*More info on Cron configuration on [Fedora-fr.org](https://doc.fedora-fr.org/wiki/CRON_:_Configuration_de_t%C3%A2ches_automatis%C3%A9es#:~:text= The%20configuration%20of%20cron%20se,via%20the%20command%20crontab%20%2De.)*
 
 </br>
 
-Ouvrez le fichier crontab avec `crontab -e`, choisir Nano
+Open the crontab file with `crontab -e`, choose Nano
 
-Remplacez la ligne 
+Replace the line
 ```
 m h  dom mon dow   command
 ``` 
-par 
+for 
 
 ```
 */10 * * * * sh /path/to/script
 ```
 
-Votre script s'activera alors toutes les 10min.
+Your script will then activate every 10min.
 
 </br>
 
-Tout vérifier : service --status-all
+Check all: service --status-all
 
 </br>
 
 __Correction__
 ----
 </br>
-Comparaison de la signature de votre machine virtuelle et de celle que vous avez soumise : 
+Comparison of your VM's signature and the one you submitted:
 
 ```
 diff <(echo “string 1”) <(echo “string2”)
 ```
 
-Vous devez savoir expliquer :
+You must be able to explain:
 
-- Comment fonctionne une machine virtuelle et son but
+- How a virtual machine works and its purpose
 
-- Votre choix entre CentOs et Debian
+- Your choice between CentOs and Debian
 
-- Si vous avez choisis Debian : la difference entre apt et Aptitude et ce qu'est APPArmor
+- If you chose Debian: the difference between apt and Aptitude and what APPArmor is
 
-- Si vous avez choisis CentOs : ce qu'est SELinux et DNF
+- If you have chosen CentOs: what is SELinux and DNF
 
-Durant la defense votre script devra tourner et afficher les infos voulues sur vos terminaux.
+During the defense your script will have to run and display the desired information on your terminals.
 
-Connectez vous sur un compte user, autre que root, avec le bon mdp.
+Log in to a user account, other than root, with the correct password.
 
-Vérifiez que le service UFW tourne : 
+Verify that the UFW service is running:
 ```
-sudo ufw status verbose OU sudo ufw status numbered
+sudo ufw status verbose OR sudo ufw status numbered
 ```
 
-Vérifiez que le service SSH tourne aussi :
+Verify that the SSH service is also running:
 ```
 sudo service ssh status
 ```
-Vérifiez le systeme d'exploitation :
+Check the operating system:
 ```
-uname -a 
+uname -a
 ```
 
-Vérifiez a quel groupes appartient le user : ```groups```
+Check which groups the user belongs to: ```groups```
 
-Create a new user : 
+Create a new user:
 ```
 sudo useradd 
 ```
@@ -556,7 +551,7 @@ Advantages of password policy
 
 Check hostname : sudo hostname
 
-Modify hostname and reboot : 
+Modify hostname and reboot :
 ```
 				sudo nano /etc/hostname
 				sudo nano /etc/hosts
@@ -653,31 +648,31 @@ _wall << End_Of_Message : career un message qui s’affiche dans les terminaux a
 	
 _Architecture : recupere informations OS
 	
-_CPU physical : recupere lscpu 
-	
-_vCPU : recupere cpuinfo
-	
-_echo $MEMUSED $ MEMTOTAL … : recupere les valeurs de mémoire, les convertit en MB
-	
-_df …. : affiche la mémoire utilisée et le pourcentage de memoire 
-	
-_awk… : recupere l’utilisation CPU
-	
+_CPU physical: get lscpu
+
+_vCPU: get cpuinfo
+
+_echo $MEMUSED $MEMTOTAL …: retrieve memory values, convert them to MB
+
+_df …. : displays the memory used and the percentage of memory
+
+_awk…: get CPU usage
+
 _Last boot
-	
+
 _LVM use
-	
-_awk.. : nombre de connections TCP
-	
-_user log 
-	
-_ip -br : adresse ipV4
-	
-_nombre de commandes effectuées par sudo 
-	
+
+_awk..: number of TCP connections
+
+_userlog
+
+_ip -br: ipV4 address
+
+_number of commands performed by sudo
+
 sudo bash monitoring.sh
-	
-Cron : Programm that allows users to execute scripts, commands or programs at a date/hour specified in advance or according to a specific cycle.
+
+Cron: Programm that allows users to execute scripts, commands or programs at a date/hour specified in advance or according to a specific cycle.
 	
 Ensure script runs every 1min / every 10 minutes. Make the script stop running when the server starts up.
 	
